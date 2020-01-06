@@ -284,7 +284,7 @@ TRUNCATE <table_name>
 
 ## Alter
 
-Most aspects of a table may be altered using the `ALTER` statement:
+Most aspects of an existing table may be altered using the `ALTER` statement:
 
 ```mysql
 ALTER TABLE <table_name>
@@ -310,3 +310,33 @@ ALTER TABLE <table_name>
 ```
 
 ### Changing a Column: Alter vs Modify vs Change
+
+The `ALTER TABLE` command has a few different ways to modify a column, which can be confusing.
+
+The most powerful command (which can be used to accomplish any of the other column-altering commands, albeit with a more wordy syntax) is the `CHANGE` command.  It can be used to rename a column, change its definition, and change its column order.  For example, the command below renames a person table’s birth_date column to ‘birthday’, re-defines its datatype and nullability, and moves it to be the first column of the table:
+
+```mysql
+ALTER TABLE person CHANGE birth_date birthday DATETIME NULL FIRST
+```
+
+The `MODIFY` command is much like the `CHANGE` command but it cannot be used to rename the column.  Here, the birthday column’s data type and nullability are being modified, and it is moved to be after the ‘last_name’ column:
+
+```mysql
+ALTER TABLE person MODIFY birthday DATE NOT NULL AFTER last_name
+```
+
+If you simply want to rename a column, use `RENAME` as in:
+
+```mysql
+ALTER TABLE person RENAME birth_date TO birthday
+```
+
+{{< hint warning >}}
+The `RENAME` syntax is not available in versions of MySQL older than 8.0
+{{< /hint >}}
+
+The `ALTER` clause allows you to change or remove the `DEFAULT` on a column.  The following example removes the default value from the person table’s birthday column:
+
+```mysql
+ALTER TABLE person ALTER COLUMN birthday DROP DEFAULT
+```

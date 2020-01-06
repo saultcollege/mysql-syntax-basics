@@ -4,7 +4,7 @@ date: 2019-12-16T10:56:00
 weight: 10
 ---
 
-# Character Sets & Collations
+# Appendix A: Character Sets & Collations
 
 ## Character Sets
 
