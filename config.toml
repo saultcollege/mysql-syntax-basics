@@ -1,0 +1,13 @@
+baseURL = "https://rmartin-sc.github.io/mysql-syntax-basics"
+languageCode = "en-us"
+title = "MySQL Syntax Basics"
+theme = ["hugo-book"]
+
+[markup.goldmark.renderer] 
+    unsafe = true 
+
+[markup.highlight]
+    style = "xcode"
+
+[Params]
+    menu_style = "slide-menu"
