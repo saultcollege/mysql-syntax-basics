@@ -75,4 +75,26 @@ Thus, instead of seeing the '爱' character, you would see the pair of character
 As you can see, it is important to ensure that documents and tables are read using the same encodings in which they were stored.
 
 
-### Collations
+## Collations
+
+A collation specifies how characters in a character set should be ordered.  There can be many collations for one character set.
+
+For example, some collations might specify that all uppercase letters should come before all lowercase letters, so that the words 'Apple', 'apple', 'Banana', and 'banana' would be sorted as follows:
+
+    Apple
+    Banana
+    apple
+    banana
+
+A different collation might put the upper- and lowercase letters together in the sort order:
+
+    Apple
+    apple
+    Banana
+    banana
+
+Collations are very language dependent.  Some languages include accents or multi-character encodings that can effect the ordering of characters, for example.
+
+### Collation Performance
+
+Different collations may also have different performance characteristics.  For example, a simple binary collation that just uses the binary encoding for each character to determine its value compared to other characters will generally have faster performance than a collation that must map sets of characters distinctly from their natural binary order.
