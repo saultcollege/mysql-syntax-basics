@@ -1,4 +1,4 @@
-baseURL = "https://rmartin-sc.github.io/mysql-syntax-basics"
+baseURL = "https://saultcollege.github.io/mysql-syntax-basics"
 languageCode = "en-us"
 title = "MySQL Syntax Basics"
 theme = ["hugo-book"]
