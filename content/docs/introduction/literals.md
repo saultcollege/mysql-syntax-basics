@@ -10,6 +10,7 @@ date: 2019-12-04T11:15:23-05:00
 
 Number values can be written directly.  The following are all valid number representations in MySQL:
 
+{{< sqldiagram >}}
 ```mysql
 1
 1.0
@@ -20,6 +21,7 @@ Number values can be written directly.  The following are all valid number repre
 -1.2e-3       -- scientific notation
 0xBEEF        -- hexadecimal values start with 0x
 ```
+{{< /sqldiagram >}}
 
 ## Booleans
 
@@ -30,9 +32,11 @@ In MySQL, `TRUE` and `FALSE` are aliases for 1 and 0 respectively
 
 A string is a sequence of characters.  You may use single quotes to indicate a string:
 
+{{< sqldiagram >}}
 ```mysql
 'This is a string'
 ```
+{{< /sqldiagram >}}
 
 ### Escape Sequences
 
@@ -54,9 +58,12 @@ In the context of a `LIKE` clause, the `%` and `_` characters are interpreted by
 
 This LIKE clause would match any values ending with the `%` character, for example:
 
+{{< sqldiagram >}}
 ```mysql
 LIKE '%\%'
 ```
+{{< /sqldiagram >}}
+
 {{< hint warning >}}
 **NOTE**: The `\%` and `\_` escape sequences **only** work in the context of a `LIKE` clause
 {{< /hint >}}
@@ -67,10 +74,11 @@ There are a number of ways to represent dates, but here we will recommend one: u
 
 The following are all valid date/time literals in MySQL
 
+{{< sqldiagram >}}
 ```mysql
 '2000-01-23'                 -- date only
 '2000-01-23 04:30'           -- date and time
 '2000-01-23 04:30:30'        -- date and time with seconds
 '2000-01-23 04:30:30.5'      -- date and time with fractional seconds
 '04:30:30'                   -- time only
-
+{{< /sqldiagram >}}

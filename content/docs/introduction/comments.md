@@ -8,6 +8,7 @@ weight: 100
 
 There are a number of different ways to make comments in MySQL scripts:
 
+{{< sqldiagram >}}
 ```mysql
 -- This is a single-line comment
 -- Each line must be preceeded by two dashes
@@ -29,3 +30,4 @@ SELECT 1 + /* c-style comments may be placed in-line */ + 2 + 3;
 
 SELECT 1 + -- But single-line comments go to the end of the line -- + 2 + 3;
 ```
+{{< /sqldiagram >}}

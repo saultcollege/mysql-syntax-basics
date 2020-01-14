@@ -1,0 +1,22 @@
+.sqldiagram {
+    border-left: .25rem solid #e9ecef;
+    border-radius: .15rem;
+}
+
+.sqldiagram .highlight ~ p {
+    padding-left: 1em;
+    font-size: smaller;
+}
+
+.sqldiagram .highlight ~ p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.sqldiagram .highlight ~ p:first-of-type {
+    border-top: 1px solid #e9ecef;
+    margin-top: -1em;
+}
+.sqldiagram .highlight ~ p:last-of-type {
+    padding-bottom: 1em;
+}

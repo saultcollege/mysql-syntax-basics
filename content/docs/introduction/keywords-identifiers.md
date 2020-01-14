@@ -16,12 +16,16 @@ Sometimes you may want to name a database object with the same name as a keyword
 
 For example, suppose you want to create a table named 'table'.  The following statement causes a syntax error:
 
+{{< sqldiagram >}}
 ```mysql
 CREATE TABLE table ( /* column/constraint definitions */ )  
 ```
+{{< /sqldiagram >}}
 
 But this statement does not:
 
+{{< sqldiagram >}}
 ```mysql
 CREATE TABLE `table` ( /* column/constraint definitions */ )  
 ```
+{{< /sqldiagram >}}

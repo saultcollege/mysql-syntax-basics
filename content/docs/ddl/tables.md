@@ -8,6 +8,7 @@ weight: 20
 
 ## Create
 
+{{< sqldiagram >}}
 ```mysql
 CREATE [TEMPORARY] TABLE [IF NOT EXISTS] <table_name> (
   <<ColumnDefinition>>,..
@@ -18,6 +19,10 @@ CREATE [TEMPORARY] TABLE [IF NOT EXISTS] <table_name> (
 [CHARACTER SET [=] <charset_name>]
 [COLLATE [=] <collation_name>]
 ```
+[<<ColumnDefinition>>]({{< ref "#column-definition" >}})
+
+[<<ConstraintDefinition>>]({{< ref "#constraint-definition" >}})
+{{< /sqldiagram >}}
 
 {{< hint info >}}
 A `TEMPORARY` table only exists for the duration of the current connection to the database.  Temporary tables can be useful as intermediate steps in complicated queries (as opposed to using subqueries).
@@ -40,12 +45,15 @@ You usually never set the `AUTO_INCREMENT` value for a table, but you may encoun
 
 A very simple table:
 
+{{< sqldiagram >}}
 ```mysql
 CREATE TABLE mytable ( x INT );
 ```
+{{< /sqldiagram >}}
 
-A table with a little bit of everthing:
+A table with a little bit of everything:
 
+{{< sqldiagram >}}
 ```mysql
 CREATE TABLE person (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -65,13 +73,18 @@ ENGINE = InnoDB
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_general_ci;
 ```
+{{< /sqldiagram >}}
 
-### Column Definition<a name="col_definition"></a>
+### Column Definition
 
+{{< sqldiagram >}}
 ```mysql
 <col_name> <<DataType>> [[NOT] NULL] [DEFAULT <default_value>] 
     [AUTO_INCREMENT] [ UNIQUE [KEY] | [PRIMARY] KEY ]
 ```
+[<<DataType>>]({{< ref "#data-type" >}})
+{{< /sqldiagram >}}
+
 {{< hint info >}}
 A column will be nullable unless otherwise specified
 {{< /hint >}}
@@ -88,31 +101,40 @@ You can **not** create composite keys using `UNIQUE KEY` or `PRIMARY KEY` in a c
 
 A simple nullable integer column:
 
+{{< sqldiagram >}}
 ```mysql
 id INT
 ```
+{{< /sqldiagram >}}
 
 A surrogate key column:
 
+{{< sqldiagram >}}
 ```mysql
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY
 ```
+{{< /sqldiagram >}}
 
 A column with a unique constraint (no two rows may have the same value in this column):
 
+{{< sqldiagram >}}
 ```mysql
 code CHAR(4) UNIQUE
 ```
+{{< /sqldiagram >}}
 
 A column with a default value:
 
+{{< sqldiagram >}}
 ```mysql
 -- Note the use of back ticks because 'date' is an SQL keyword
 `date` DATETIME NOT NULL DEFAULT NOW()
 ```
+{{< /sqldiagram >}}
 
-### Constraint Definition<a name="constraint_definition"></a>
+### Constraint Definition
 
+{{< sqldiagram >}}
 ```mysql
     [CONSTRAINT [<constraint_name>]] PRIMARY KEY (<col_name>,..)
   | [CONSTRAINT [<constraint_name>]] FOREIGN KEY (<col_name>,..) 
@@ -120,6 +142,7 @@ A column with a default value:
         [ON UPDATE CASCADE] [ON DELETE CASCADE]
   | {UNIQUE|[UNIQUE] INDEX|KEY} [<index_name>] (<col_name>,..) [ ASC | DESC ]
 ```
+{{< /sqldiagram >}}
 
 {{< hint info >}}
 The `<other_table_col_name>` must be a column in the referenced table
@@ -129,44 +152,55 @@ The `<other_table_col_name>` must be a column in the referenced table
 
 A composite primary key:
 
+{{< sqldiagram >}}
 ```mysql
 -- The following three lines each achieve the same result
 PRIMARY KEY(order_number, line_item_number)
 CONSTRAINT PRIMARY KEY (order_number, line_item_number)
 CONSTRAINT pk_order PRIMARY KEY (order_number, line_item_number) -- This line gives the primary key the name 'pk_order'
 ```
+{{< /sqldiagram >}}
 
 A simple foreign key:
 
+{{< sqldiagram >}}
 ```mysql
 -- Note the use of back ticks because 'order' is an SQL keyword
 FOREIGN KEY (order_number) REFERENCES `order`(id)
 ```
+{{< /sqldiagram >}}
 
 A named foreign key with referential integrity constraints:
 
+{{< sqldiagram >}}
 ```mysql
 CONSTRAINT fk_line_item_order FOREIGN KEY (order_number)
     REFERENCES `order`(id)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 ```
+{{< /sqldiagram >}}
 
 A simple index:
 
+{{< sqldiagram >}}
 ```mysql
 INDEX (code) 
 ```
+{{< /sqldiagram >}}
 
 A composite unique index (no two rows may have the same `firstname` and `lastname` values)
 
+{{< sqldiagram >}}
 ```mysql
 UNIQUE INDEX (firstname, lastname)
 ```
+{{< /sqldiagram >}}
 
 
-### Data Type<a name="data_type"></a>
+### Data Type
 
+{{< sqldiagram >}}
 ```mysql
     TINYINT[(<length>)] [UNSIGNED]
   | SMALLINT[(<length>)] [UNSIGNED]
@@ -191,21 +225,26 @@ UNIQUE INDEX (firstname, lastname)
   | ENUM(value,...)
       [CHARACTER SET <charset_name>] [COLLATE <collation_name>]
 ```
+{{< /sqldiagram >}}
 
 ### Show
 
 Generate the CREATE TABLE statement for an existing table:
 
+{{< sqldiagram >}}
 ```mysql
 SHOW CREATE TABLE <table_name>
 ```
+{{< /sqldiagram >}}
 
 ## Create from Another Table
 
+{{< sqldiagram >}}
 ```mysql
 CREATE [TEMPORARY] TABLE [IF NOT EXISTS] <new_table_name> 
 LIKE <existing_table_name>
 ```
+{{< /sqldiagram >}}
 
 {{< hint info >}}
 Creates an **empty** copy of an existing table, preserving column definitions and indexes
@@ -219,16 +258,21 @@ Does **not** preserve foreign keys (although the indexes for any foreign keys in
 
 Create an employee table with the same schema as the person table:
 
+{{< sqldiagram >}}
 ```mysql
 CREATE TABLE employee LIKE person
 ```
+{{< /sqldiagram >}}
 
 ## Create from Query Results
 
+{{< sqldiagram >}}
 ```mysql
 CREATE [TEMPORARY] TABLE [IF NOT EXISTS] <new_table_name> 
 [AS] <<SelectStatement>>
 ```
+[<<SelectStatement>>]({{< ref "select" >}})
+{{< /sqldiagram >}}
 
 {{< hint info >}}
 **Only** the column names and datatypes of the select statement are preserved.  No constraints, keys, default values, etc. are added to the new table
@@ -238,42 +282,54 @@ CREATE [TEMPORARY] TABLE [IF NOT EXISTS] <new_table_name>
 
 Create a temporary table named 'names' that contains two columns, first_name and last_name, which are derived from the fname and lname columns of the person table: 
 
+{{< sqldiagram >}}
 ```mysql
 CREATE TEMPORARY TABLE names 
 SELECT fname AS first_name, lname AS last_name FROM person
 ```
+{{< /sqldiagram >}}
 
 ## Drop
 
+{{< sqldiagram >}}
 ```mysql
 DROP [TEMPORARY] TABLE [IF EXISTS] <table_name>,..
 ```
+{{< /sqldiagram >}}
 
 #### Examples
 
 Drop the person table:
 
+{{< sqldiagram >}}
 ```mysql
 DROP TABLE person
 ```
+{{< /sqldiagram >}}
 
 Drop a temporary names table, but only if it exists:
 
+{{< sqldiagram >}}
 ```mysql
 DROP TEMPORARY TABLE IF EXISTS names
 ```
+{{< /sqldiagram >}}
 
 Drop multiple tables if they exist:
 
+{{< sqldiagram >}}
 ```mysql
 DROP TABLE IF EXISTS person, employee, student
 ```
+{{< /sqldiagram >}}
 
 ## Truncate
 
+{{< sqldiagram >}}
 ```mysql
 TRUNCATE <table_name>
 ```
+{{< /sqldiagram >}}
 
 {{< hint warning >}}
 **NOTE**: Truncating a table empties the table of data by dropping and re-creating the table.  This means that unlike `DELETE FROM <table_name>`, it has the following effects:
@@ -286,6 +342,7 @@ TRUNCATE <table_name>
 
 Most aspects of an existing table may be altered using the `ALTER` statement:
 
+{{< sqldiagram >}}
 ```mysql
 ALTER TABLE <table_name>
 {
@@ -308,6 +365,10 @@ ALTER TABLE <table_name>
   | RENAME [TO|AS] <new_table_name>
 },..
 ```
+[<<ColumnDefinition>>]({{< ref "#column-definition" >}})
+
+[<<ConstraintDefinition>>]({{< ref "#constraint-definition" >}})
+{{< /sqldiagram >}}
 
 ### Changing a Column: Alter vs Modify vs Change
 
@@ -315,21 +376,27 @@ The `ALTER TABLE` command has a few different ways to modify a column, which can
 
 The most powerful command (which can be used to accomplish any of the other column-altering commands, albeit with a more wordy syntax) is the `CHANGE` command.  It can be used to rename a column, change its definition, and change its column order.  For example, the command below renames a person table’s birth_date column to ‘birthday’, re-defines its datatype and nullability, and moves it to be the first column of the table:
 
+{{< sqldiagram >}}
 ```mysql
 ALTER TABLE person CHANGE birth_date birthday DATETIME NULL FIRST
 ```
+{{< /sqldiagram >}}
 
 The `MODIFY` command is much like the `CHANGE` command but it cannot be used to rename the column.  Here, the birthday column’s data type and nullability are being modified, and it is moved to be after the ‘last_name’ column:
 
+{{< sqldiagram >}}
 ```mysql
 ALTER TABLE person MODIFY birthday DATE NOT NULL AFTER last_name
 ```
+{{< /sqldiagram >}}
 
 If you simply want to rename a column, use `RENAME` as in:
 
+{{< sqldiagram >}}
 ```mysql
 ALTER TABLE person RENAME birth_date TO birthday
 ```
+{{< /sqldiagram >}}
 
 {{< hint warning >}}
 The `RENAME` syntax is not available in versions of MySQL older than 8.0
@@ -337,6 +404,8 @@ The `RENAME` syntax is not available in versions of MySQL older than 8.0
 
 The `ALTER` clause allows you to change or remove the `DEFAULT` on a column.  The following example removes the default value from the person table’s birthday column:
 
+{{< sqldiagram >}}
 ```mysql
 ALTER TABLE person ALTER COLUMN birthday DROP DEFAULT
 ```
+{{< /sqldiagram >}}
