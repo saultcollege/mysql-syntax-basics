@@ -130,7 +130,7 @@ For example, in the diagram below, `<<DataType>>` refers to a separate sub-diagr
 ```mysql
     INT[EGER][(<length>)] [UNSIGNED]
   | DATE
-  | VARCHAR(length)
+  | VARCHAR(<length>)
 ```
 {{< /sqldiagram >}}
 

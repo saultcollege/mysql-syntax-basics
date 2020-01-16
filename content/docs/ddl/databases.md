@@ -74,8 +74,8 @@ DROP DATABASE IF EXISTS test;  -- no error, even if there is no 'test' database
 ```mysql
 ALTER {DATABASE|SCHEMA} <db_name>
   { 
-      CHARACTER SET [=] charset_name
-    | COLLATE [=] collation_name
+      CHARACTER SET [=] <charset_name>
+    | COLLATE [=] <collation_name>
   } ..
 ```
 {{< /sqldiagram >}}
