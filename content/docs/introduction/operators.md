@@ -38,33 +38,33 @@ A condition expression consists of an operator and its operand(s).  The `AND` an
 
 #### Examples
 
-A simple condition expression:
-
 {{< sqldiagram >}}
+**A simple condition expression:**
+
 ```mysql
 price < 50
 ```
 {{< /sqldiagram >}}
 
-A combined expression using `AND`:
-
 {{< sqldiagram >}}
+**A combined expression using `AND`:**
+
 ```mysql
 price < 50 AND category = 'toy'
 ```
 {{< /sqldiagram >}}
 
-A combined expression using `OR`:
-
 {{< sqldiagram >}}
+**A combined expression using `OR`:**
+
 ```mysql
 category = 'model' OR category = 'toy'
 ```
 {{< /sqldiagram >}}
 
-A combined expression using both `AND` and `OR`.  
-
 {{< sqldiagram >}}
+**A combined expression using both `AND` and `OR`.**
+
 ```mysql
 price < 50 AND category = 'model' OR category = 'toy'
 ```
@@ -74,14 +74,20 @@ price < 50 AND category = 'model' OR category = 'toy'
 
 **WARNING**: `AND` expressions will be evaluated **before** `OR` expressions.  The above query may not do what you expect.  Specifically, it does **not** select any products in the model or toy categories that are also less than $50.  Instead, it selects either any toy (at any price), or any model that is less than $50.  If you want the former you need to use parentheses to force the correct order of operations:
 
+{{< sqldiagram >}}
 ```mysql
 price < 50 AND (category = 'model' OR category = 'toy')
 ```
+{{< /sqldiagram >}}
 
 ### A common mistake
 
 {{< sqldiagram >}}
 ```mysql
+-- Don't do this:
 category = 'model' OR 'toy'
+
+-- Do this instead:
+category = 'model' OR category = 'toy'
 ```
 {{< /sqldiagram >}}

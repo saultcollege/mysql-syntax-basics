@@ -40,25 +40,25 @@ An expression may be used to combine values from multiple columns into a single 
 
 #### Examples
 
-Select all the columns of the person table:
-
 {{< sqldiagram >}}
+**Select all the columns of the person table:**
+
 ```mysql
 SELECT * FROM person
 ```
 {{< /sqldiagram >}}
 
-Select a number of columns from a table:
-
 {{< sqldiagram >}}
+**Select a number of columns from a table:**
+
 ```mysql
 SELECT first_name, last_name, phone FROM person
 ```
 {{< /sqldiagram >}}
 
-Select a number of columns from a table, but alias some columns:
-
 {{< sqldiagram >}}
+**Select a number of columns from a table, but alias some columns:**
+
 ```mysql
 SELECT 
     first_name AS First, 
@@ -68,25 +68,25 @@ FROM person
 ```
 {{< /sqldiagram >}}
 
-Just yield a plain string:
-
 {{< sqldiagram >}}
+**Just yield a plain string:**
+
 ```mysql
 SELECT 'Hello, world!'
 ```
 {{< /sqldiagram >}}
 
-Yield a plain string, but alias the resultant column:
-
 {{< sqldiagram >}}
+**Yield a plain string, but alias the resultant column:**
+
 ```mysql
 SELECT 'Hello, world!' AS message
 ```
 {{< /sqldiagram >}}
 
-Do a calculation in a column:
-
 {{< sqldiagram >}}
+**Do a calculation in a column:**
+
 ```mysql
 SELECT 
     first_name, 
@@ -96,9 +96,9 @@ FROM person
 ```
 {{< /sqldiagram >}}
 
-Refer to multiple columns and use MySQL functions:
-
 {{< sqldiagram >}}
+**Refer to multiple columns and use MySQL functions:**
+
 ```mysql
 SELECT CONCAT(first_name, ' ', last_name) AS Name, role FROM person
 ```
@@ -110,17 +110,17 @@ The `DISTINCT` keyword causes duplicate rows in the query result to be removed.
 
 #### Examples
 
-A list of distinct last names:
-
 {{< sqldiagram >}}
+**A list of distinct last names:**
+
 ```mysql
 SELECT DISTINCT last_name FROM person;
 ```
 {{< /sqldiagram >}}
 
-A list of distinct names:
-
 {{< sqldiagram >}}
+**A list of distinct names:**
+
 ```mysql
 SELECT DISTINCT first_name, last_name FROM person;
 ```
@@ -138,9 +138,9 @@ The `WHERE` clause can be used to filter the result set according to a [conditio
 
 #### Examples
 
-Select only people with the last name 'Dent':
-
 {{< sqldiagram >}}
+**Select only people with the last name 'Dent':**
+
 ```mysql
 SELECT first_name FROM person WHERE last_name = 'Dent'
 ```
@@ -158,9 +158,9 @@ If `ASC` or `DESC` is not specified in the `ORDER BY` clause, `ASC` is assumed.
 
 #### Examples
 
-Order people by last name in ascending order:
-
 {{< sqldiagram >}}
+**Order people by last name in ascending order:**
+
 ```mysql
 SELECT first_name, last_name 
 FROM person
@@ -168,9 +168,9 @@ ORDER BY last_name ASC; -- ASC here is optional as it is the default
 ```
 {{< /sqldiagram >}}
 
-Order people by last name in descending order:
-
 {{< sqldiagram >}}
+**Order people by last name in descending order:**
+
 ```mysql
 SELECT first_name, last_name 
 FROM person
@@ -178,9 +178,9 @@ ORDER BY last_name DESC; -- DESC here is necessary as it is NOT the default
 ```
 {{< /sqldiagram >}}
 
-Order people by last name, and if two people have the same last name order by first name:
-
 {{< sqldiagram >}}
+**Order people by last name, and if two people have the same last name order by first name:**
+
 ```mysql
 SELECT first_name, last_name 
 FROM person
@@ -188,9 +188,9 @@ ORDER BY last_name, first_name;
 ```
 {{< /sqldiagram >}}
 
-Order people by last name, then first name; if two people have the same name then order by phone number in descending order:
-
 {{< sqldiagram >}}
+**Order people by last name, then first name; if two people have the same name then order by phone number in descending order:**
+
 ```mysql
 SELECT first_name, last_name 
 FROM person
@@ -215,25 +215,25 @@ This can be especially useful for scenarios where you need to implement ‘pagin
 
 #### Examples
 
-Show only 10 people:
-
 {{< sqldiagram >}}
+**Show only 10 people:**
+
 ```mysql
 SELECT first_name, last_name FROM person LIMIT 10
 ```
 {{< /sqldiagram >}}
 
-Show only 10 people, starting at the 5th 'page' of 10:
-
 {{< sqldiagram >}}
+**Show only 10 people, starting at the 5th 'page' of 10:**
+
 ```mysql
 SELECT first_name, last_name FROM person LIMIT 10 OFFSET 40
 ```
 {{< /sqldiagram >}}
 
-The top 3 salary earners:
-
 {{< sqldiagram >}}
+**The top 3 salary earners:**
+
 ```mysql
 SELECT first_name, last_name, salary 
 FROM person
@@ -245,9 +245,9 @@ ORDER BY
 The following examples combine some or all of the clauses we have discussed above
 {{< /hint >}}
 
-The top 3 salary earners in the manager role, sorted in descending order by salary:
-
 {{< sqldiagram >}}
+**The top 3 salary earners in the manager role, sorted in descending order by salary:**
+
 ```mysql
 SELECT first_name, last_name, salary
 FROM person
@@ -257,9 +257,9 @@ LIMIT 3
 ```
 {{< /sqldiagram >}}
 
-The 5th oldest sales person:
-
 {{< sqldiagram >}}
+**The 5th oldest sales person:**
+
 ```mysql
 SELECT first_name, last_name
 FROM person

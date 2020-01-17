@@ -22,18 +22,18 @@ In MySQL, the terms 'database' and 'schema' have the same meaning, but this is *
 
 #### Examples
 
-Create a new database named 'test' using the utf8mb4 character set (both these statements to the same thing)
-
 {{< sqldiagram >}}
+**Create a new database named 'test' using the utf8mb4 character set (both these statements to the same thing)**
+
 ```mysql {linenos=table}
 CREATE DATABASE test CHARACTER SET utf8mb4;
 CREATE SCHEMA test CHARACTER SET utf8mb4;
 ```
 {{< /sqldiagram >}}
 
-Create a database named 'test', but **only** if a database named 'test' doesn't already exist:
-
 {{< sqldiagram >}}
+**Create a database named 'test', but **only** if a database named 'test' doesn't already exist:**
+
 ```mysql
 CREATE DATABASE IF NOT EXISTS test;
 ```
@@ -51,16 +51,17 @@ DROP {DATABASE|SCHEMA} [IF EXISTS] <db_name>
 
 #### Examples
 
-Delete the database named 'test'
-
 {{< sqldiagram >}}
+**Delete the database named 'test'**
+
 ```mysql
 DROP DATABASE test;  -- throws an error if there is no such database
 ```
 {{< /sqldiagram >}}
 
-Delete the database named 'test' **only** if there is a database with that name
 {{< sqldiagram >}}
+**Delete the database named 'test' **only** if there is a database with that name**
+
 ```mysql
 DROP DATABASE IF EXISTS test;  -- no error, even if there is no 'test' database
 ```
@@ -82,17 +83,17 @@ ALTER {DATABASE|SCHEMA} <db_name>
 
 #### Examples
 
-Change the character set of a database:
-
 {{< sqldiagram >}}
+**Change the character set of a database:**
+
 ```mysql
 ALTER DATABASE test CHARACTER SET latin1;
 ```
 {{< /sqldiagram >}}
 
-Change both the character set and collation:
-
 {{< sqldiagram >}}
+**Change both the character set and collation:**
+
 ```mysql
 ALTER DATABASE test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```

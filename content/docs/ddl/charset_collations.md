@@ -10,11 +10,13 @@ In MySQL, you can set a character set and/or collation for a whole database, for
 
 See [Appendix A](/docs/appendix/a) for more detailed information about Character Sets and Collations.
 
+{{< sqldiagram >}}
 ```mysql
 -- Within the context of a CREATE DATABASE or CREATE TABLE statement, 
 -- or in a column's data type definition within a CREATE TABLE statement
 [ CHARACTER SET <encoding_name> ] [ COLLATE <collation_name> ]
 ```
+{{< /sqldiagram >}}
 
 {{< hint warning >}}
 **NOTE**: The `<encoding_name>` and `<collation_name>` must be compatible.  You cannot, for example, use the `utf8mb4_general_ci` collation with the `latin1` character set.
@@ -32,13 +34,16 @@ When you want to use the UTF-8 encoding it is best practice to **always** use ut
 
 Setting the character set and collation for a whole [database](/docs/ddl/databases):
 
+{{< sqldiagram >}}
 ```mysql
 CREATE DATABASE mydb CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 -- All text-based columns will be encoded using the database's character set unless otherwise specified
 ```
+{{< /sqldiagram >}}
 
 Setting the character set and collation for an individual [table](/docs/ddl/tables):
 
+{{< sqldiagram >}}
 ```mysql
 CREATE TABLE mydb.mytable (
     -- This table's text columns will be encoded using the its character set
@@ -46,9 +51,11 @@ CREATE TABLE mydb.mytable (
 CHARACTER SET latin1 
 COLLATE latin1_swedish_ci
 ```
+{{< /sqldiagram >}}
 
 Setting the character set and collation for a specific text column in a table.
 
+{{< sqldiagram >}}
 ```mysql
 CREATE TABLE mydb.mytable (
     -- This column uses a specific character set that is different than the table's default
@@ -58,3 +65,4 @@ CREATE TABLE mydb.mytable (
 CHARACTER SET latin1 
 COLLATE latin1_swedish_ci
 ```
+{{< /sqldiagram >}}

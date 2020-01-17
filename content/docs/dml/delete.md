@@ -7,9 +7,11 @@ weight: 30
 
 # Delete
 
+{{< sqldiagram >}}
 ```mysql
 DELETE FROM <table_name> [WHERE <<ConditionExpression>>]
 ```
+{{< /sqldiagram >}}
 
 {{< hint warning >}}
 **WARNING**: Leaving off the `WHERE` clause results in ALL data being removed from the table.
@@ -17,20 +19,26 @@ DELETE FROM <table_name> [WHERE <<ConditionExpression>>]
 
 #### Examples
 
-Delete the row for product #123
+{{< sqldiagram >}}
+**Delete the row for product #123**
 
 ```mysql
 DELETE FROM product WHERE id = 123
 ```
+{{< /sqldiagram >}}
 
-Delete all products in the 'hardware' category
+{{< sqldiagram >}}
+**Delete all products in the 'hardware' category**
 
 ```mysql
 DELETE FROM product WHERE category = 'hardware'
 ```
+{{< /sqldiagram >}}
 
-Delete EVERY ROW in the product table
+{{< sqldiagram >}}
+**Delete EVERY ROW in the product table**
 
 ```mysql
 DELETE FROM product
 ```
+{{< /sqldiagram >}}

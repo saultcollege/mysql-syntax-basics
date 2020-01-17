@@ -43,17 +43,17 @@ You usually never set the `AUTO_INCREMENT` value for a table, but you may encoun
 
 #### Examples
 
-A very simple table:
-
 {{< sqldiagram >}}
+**A very simple table:**
+
 ```mysql
 CREATE TABLE mytable ( x INT );
 ```
 {{< /sqldiagram >}}
 
-A table with a little bit of everything:
-
 {{< sqldiagram >}}
+**A table with a little bit of everything:**
+
 ```mysql
 CREATE TABLE person (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -99,33 +99,33 @@ You can **not** create composite keys using `UNIQUE KEY` or `PRIMARY KEY` in a c
 
 #### Examples
 
-A simple nullable integer column:
-
 {{< sqldiagram >}}
+**A simple nullable integer column:**
+
 ```mysql
 id INT
 ```
 {{< /sqldiagram >}}
 
-A surrogate key column:
-
 {{< sqldiagram >}}
+**A surrogate key column:**
+
 ```mysql
 id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY
 ```
 {{< /sqldiagram >}}
 
-A column with a unique constraint (no two rows may have the same value in this column):
-
 {{< sqldiagram >}}
+**A column with a unique constraint (no two rows may have the same value in this column):**
+
 ```mysql
 code CHAR(4) UNIQUE
 ```
 {{< /sqldiagram >}}
 
-A column with a default value:
-
 {{< sqldiagram >}}
+**A column with a default value:**
+
 ```mysql
 -- Note the use of back ticks because 'date' is an SQL keyword
 `date` DATETIME NOT NULL DEFAULT NOW()
@@ -150,9 +150,9 @@ The `<other_table_col_name>` must be a column in the referenced table
 
 #### Examples
 
-A composite primary key:
-
 {{< sqldiagram >}}
+**A composite primary key:**
+
 ```mysql
 -- The following three lines each achieve the same result
 PRIMARY KEY(order_number, line_item_number)
@@ -161,18 +161,18 @@ CONSTRAINT pk_order PRIMARY KEY (order_number, line_item_number) -- This line gi
 ```
 {{< /sqldiagram >}}
 
-A simple foreign key:
-
 {{< sqldiagram >}}
+**A simple foreign key:**
+
 ```mysql
 -- Note the use of back ticks because 'order' is an SQL keyword
 FOREIGN KEY (order_number) REFERENCES `order`(id)
 ```
 {{< /sqldiagram >}}
 
-A named foreign key with referential integrity constraints:
-
 {{< sqldiagram >}}
+**A named foreign key with referential integrity constraints:**
+
 ```mysql
 CONSTRAINT fk_line_item_order FOREIGN KEY (order_number)
     REFERENCES `order`(id)
@@ -181,17 +181,17 @@ CONSTRAINT fk_line_item_order FOREIGN KEY (order_number)
 ```
 {{< /sqldiagram >}}
 
-A simple index:
-
 {{< sqldiagram >}}
+**A simple index:**
+
 ```mysql
 INDEX (code) 
 ```
 {{< /sqldiagram >}}
 
-A composite unique index (no two rows may have the same `firstname` and `lastname` values)
-
 {{< sqldiagram >}}
+**A composite unique index (no two rows may have the same `firstname` and `lastname` values)**
+
 ```mysql
 UNIQUE INDEX (firstname, lastname)
 ```
@@ -256,9 +256,9 @@ Does **not** preserve foreign keys (although the indexes for any foreign keys in
 
 #### Examples
 
-Create an employee table with the same schema as the person table:
-
 {{< sqldiagram >}}
+**Create an employee table with the same schema as the person table:**
+
 ```mysql
 CREATE TABLE employee LIKE person
 ```
@@ -280,9 +280,9 @@ CREATE [TEMPORARY] TABLE [IF NOT EXISTS] <new_table_name>
 
 #### Examples
 
-Create a temporary table named 'names' that contains two columns, first_name and last_name, which are derived from the fname and lname columns of the person table: 
-
 {{< sqldiagram >}}
+**Create a temporary table named 'names' that contains two columns, first_name and last_name, which are derived from the fname and lname columns of the person table:**
+
 ```mysql
 CREATE TEMPORARY TABLE names 
 SELECT fname AS first_name, lname AS last_name FROM person
@@ -299,25 +299,25 @@ DROP [TEMPORARY] TABLE [IF EXISTS] <table_name>,..
 
 #### Examples
 
-Drop the person table:
-
 {{< sqldiagram >}}
+**Drop the person table:**
+
 ```mysql
 DROP TABLE person
 ```
 {{< /sqldiagram >}}
 
-Drop a temporary names table, but only if it exists:
-
 {{< sqldiagram >}}
+**Drop a temporary names table, but only if it exists:**
+
 ```mysql
 DROP TEMPORARY TABLE IF EXISTS names
 ```
 {{< /sqldiagram >}}
 
-Drop multiple tables if they exist:
-
 {{< sqldiagram >}}
+**Drop multiple tables if they exist:**
+
 ```mysql
 DROP TABLE IF EXISTS person, employee, student
 ```

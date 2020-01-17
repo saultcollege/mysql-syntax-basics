@@ -7,6 +7,7 @@ weight: 10
 
 # Insert
 
+{{< sqldiagram >}}
 ```mysql
 INSERT [INTO] <table_name> [(<col_name>,..)] 
 { 
@@ -14,6 +15,7 @@ INSERT [INTO] <table_name> [(<col_name>,..)]
   | <<SelectStatement>>
 }
 ```
+{{< /sqldiagram >}}
 
 {{< hint info >}}
 You can insert multiple rows by including multiple sets of values in a comma-separated list, each set of values in parentheses.
@@ -30,13 +32,16 @@ An `INSERT .. SELECT` statement will fail if the set of columns in the select st
 
 #### Examples
 
-A basic insert
+{{< sqldiagram >}}
+**A basic insert**
 
 ```mysql
 INSERT INTO person VALUES (1, 'Alice', 'Ali')
 ```
+{{< /sqldiagram >}}
 
-A multi-row insert
+{{< sqldiagram >}}
+**A multi-row insert**
 
 ```mysql
 INSERT INTO account (id, amount) VALUES
@@ -44,8 +49,10 @@ INSERT INTO account (id, amount) VALUES
     (37322, 828.02),
     (23820, DEFAULT)
 ```
+{{< /sqldiagram >}}
 
-A multi-row insert, including AUTO_INCREMENT surrogate key values
+{{< sqldiagram >}}
+**A multi-row insert, including AUTO_INCREMENT surrogate key values**
 
 ```mysql
 INSERT INTO person (id, fname, lname) VALUES
@@ -53,8 +60,10 @@ INSERT INTO person (id, fname, lname) VALUES
    (2, 'Bob', 'Borden'),
    (3, 'Charlie', 'Crox')
 ```
+{{< /sqldiagram >}}
 
-A multi-row insert, NOT including the AUTO_INCREMENT surrogate key valuues.  (The database engine determines and inserts unique values automatically.)
+{{< sqldiagram >}}
+**A multi-row insert, NOT including the AUTO_INCREMENT surrogate key valuues.  (The database engine determines and inserts unique values automatically.)**
 
 ```mysql
 INSERT INTO person (lname, fname) VALUES
@@ -62,16 +71,21 @@ INSERT INTO person (lname, fname) VALUES
    ('Borden', 'Bob'),
    ('Crox', 'Charlie')
 ```
+{{< /sqldiagram >}}
 
-Inserting the results of a `SELECT` into a table
+{{< sqldiagram >}}
+**Inserting the results of a `SELECT` into a table**
 
 ```mysql
 INSERT INTO old_person SELECT * FROM person WHERE person.age > 65
 ```
+{{< /sqldiagram >}}
 
-Inserting specific columns of the results of a `SELECT` into a table
+{{< sqldiagram >}}
+**Inserting specific columns of the results of a `SELECT` into a table**
 
 ```mysql
 INSERT INTO old_person (first_name, last_name)
     SELECT fname, lname FROM person WHERE person.age > 65
 ```
+{{< /sqldiagram >}}

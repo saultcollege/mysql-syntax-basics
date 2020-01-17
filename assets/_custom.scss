@@ -3,6 +3,24 @@
     border-radius: .15rem;
 }
 
+.sqldiagram > p {
+    padding-left: 1em;
+    padding-top: 0.5rem;
+}
+
+.sqldiagram > p:first-child > strong {
+    color:
+    rgba(0,0,0,0.5);
+    font-weight: lighter;
+    display: inline-block;
+}
+
+.book-hint .sqldiagram {
+    border-left: none;
+    margin-left: -0.75rem;
+    margin-right: -1rem;
+}
+
 .sqldiagram .highlight ~ p {
     padding-left: 1em;
     font-size: smaller;
