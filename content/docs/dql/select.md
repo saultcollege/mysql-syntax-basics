@@ -154,7 +154,7 @@ SELECT first_name FROM person WHERE last_name = 'Dent'
 
 When ordering by multiple columns, results are sorted by the first column specified, and if there are duplicate values then the results are further sorted by the second column specified, and so on.
 
-If `ASC` or `DESC` is not specified in the `ORDER BY` clause, `ASC` is assumed.
+Results can be set to ascending or descending order using the `ASC` or `DESC` keywoerds.  If `ASC` or `DESC` is not specified in the `ORDER BY` clause, `ASC` is assumed.
 
 #### Examples
 
@@ -207,7 +207,7 @@ ORDER BY last_name, first_name, phone DESC;
 
 The `LIMIT` clause allows you to pick a specific number of rows, and the `OFFSET` clause allows you to choose where in the result set to begin keeping results.  
 
-This can be especially useful for scenarios where you need to implement ‘paging’ in a report.  Ie, a report may only show 10 results at a time.  
+This can be especially useful for scenarios where you need to implement ‘paging’ in a report if, for example, a report may only show 10 results at a time.  
 
 {{< hint info >}}
 **NOTE:** The offset of the first row in a result set is 0, so to get the nth row you need to set the offset to n-1
@@ -227,9 +227,15 @@ SELECT first_name, last_name FROM person LIMIT 10
 **Show only 10 people, starting at the 5th 'page' of 10:**
 
 ```mysql
-SELECT first_name, last_name FROM person LIMIT 10 OFFSET 40
+SELECT first_name, last_name 
+FROM person 
+LIMIT 10 OFFSET 40
 ```
 {{< /sqldiagram >}}
+
+{{< hint info >}}
+**NOTE:** Using an `OFFSET` of 40 above gives us the 5th page. (Results 0-9 constitute the first page, 10-19 the second page, and so on...)
+{{< /hint >}}
 
 {{< sqldiagram >}}
 **The top 3 salary earners:**

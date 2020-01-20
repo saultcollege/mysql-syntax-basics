@@ -30,7 +30,7 @@ Aggregate functions, which can be used in the context of a `SELECT` clause colum
 
 | Syntax | Description |
 |------|-------------|
-| `COUNT( {[DISTINCT] <column_name>} | *)` | Count the number of rows.  If the `DISTINCT` option is used, the number of distinct values in the specified column are countedinstead. |
+| `COUNT( {[DISTINCT] <column_name>} | *)` | Count the number of rows.  If the `DISTINCT` option is used, the number of distinct values in the specified column are counted instead. |
 | `MIN(<column_name>)` | Calculate the minimum value |
 | `MAX(<column_name>)` | Calculate the maximum value |
 | `SUM(<column_name>)` | Calculate the sum of the values |
@@ -43,7 +43,7 @@ Aggregate functions, which can be used in the context of a `SELECT` clause colum
 **Count the number of people:**
 
 ```mysql
-SELECT COUNT(*) FROM people
+SELECT COUNT(*) AS n FROM people
 ```
 {{< /sqldiagram >}}
 
@@ -88,7 +88,7 @@ Adding a `GROUP BY` clause to a basic `SELECT` statement causes the result set r
 **Count the number of people in each role:**
 
 ```mysql
-SELECT role, COUNT(*) 
+SELECT role, COUNT(*) AS n
 FROM people
 GROUP BY role
 -- Yields one row per distinct role
@@ -110,7 +110,7 @@ GROUP BY role
 {{< /sqldiagram >}}
 
 {{< hint warning >}}
-It is tempting to think that the query below yields the name of the person with the highest salary, **but it (probably) does not**.  Instead, it yields the first_name and last_name of the **first** person in the table alongside the maximum salary.
+It is tempting to think that the query below yields the name of the person with the highest salary, **but it (probably) does not**.  Instead, it yields the first_name and last_name of the **first** row in the table alongside the maximum salary.
 
 {{< sqldiagram >}}
 ```mysql
