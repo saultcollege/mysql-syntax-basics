@@ -37,6 +37,10 @@ Aggregate functions, which can be used in the context of a `SELECT` clause colum
 | `AVG(<column_name>)` | Calculate the average value |
 | `GROUP_CONCAT([DISTINCT] <column_name> [ORDER BY <column_name> [ASC|DESC]] [SEPARATOR <string>])` | Concatenate all the values with the string specified in `<string>` (default is `,`).  The values may be ordered using the `ORDER BY` clause |
 
+{{< hint warning >}}
+**NOTE:** Specifying a column name in the `COUNT` function will count all rows for which that column has a non-null value; using `*` instead counds all rows including those containing `NULL`
+{{< /hint >}}
+
 #### Examples
 
 {{< sqldiagram >}}
