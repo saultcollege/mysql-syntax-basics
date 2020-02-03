@@ -37,17 +37,35 @@ Aggregate functions, which can be used in the context of a `SELECT` clause colum
 | `AVG(<column_name>)` | Calculate the average value |
 | `GROUP_CONCAT([DISTINCT] <column_name> [ORDER BY <column_name> [ASC|DESC]] [SEPARATOR <string>])` | Concatenate all the values with the string specified in `<string>` (default is `,`).  The values may be ordered using the `ORDER BY` clause |
 
-{{< hint warning >}}
-**NOTE:** Specifying a column name in the `COUNT` function will count all rows for which that column has a non-null value; using `*` instead counds all rows including those containing `NULL`
-{{< /hint >}}
+### COUNT(*) vs COUNT(<column_name>) vs COUNT(DISTINCT <column_name>)
+
+Specifying a column name in the `COUNT` function will count all rows for which that column has a non-null value; using `*` instead counds all rows including those containing `NULL`.
+
+Using `COUNT(DISTINCT <column_name>)` will count the number of rows with distinct values for column name.
 
 #### Examples
 
 {{< sqldiagram >}}
-**Count the number of people:**
+**Count the number of rows in the people table:**
 
 ```mysql
 SELECT COUNT(*) AS n FROM people
+```
+{{< /sqldiagram >}}
+
+{{< sqldiagram >}}
+**Count the number of rows for which 'email' is not null in the people table:**
+
+```mysql
+SELECT COUNT(email) AS n FROM people
+```
+{{< /sqldiagram >}}
+
+{{< sqldiagram >}}
+**Count the number of distinct first names in the people table:**
+
+```mysql
+SELECT COUNT(DISTINCT first_name) AS n FROM people
 ```
 {{< /sqldiagram >}}
 
