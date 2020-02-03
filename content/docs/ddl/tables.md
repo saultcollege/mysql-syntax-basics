@@ -275,7 +275,7 @@ CREATE [TEMPORARY] TABLE [IF NOT EXISTS] <new_table_name>
 {{< /sqldiagram >}}
 
 {{< hint info >}}
-**Only** the column names and datatypes of the select statement are preserved.  No constraints, keys, default values, etc. are added to the new table
+**Only** the column names and datatypes of the select statement are preserved.  No primary keys, foreign keys, or indexes are copied to the new table
 {{< /hint >}}
 
 #### Examples
