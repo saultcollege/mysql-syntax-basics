@@ -37,7 +37,7 @@ Aggregate functions, which can be used in the context of a `SELECT` clause colum
 | `AVG(<column_name>)` | Calculate the average value |
 | `GROUP_CONCAT([DISTINCT] <column_name> [ORDER BY <column_name> [ASC|DESC]] [SEPARATOR <string>])` | Concatenate all the values with the string specified in `<string>` (default is `,`).  The values may be ordered using the `ORDER BY` clause |
 
-### COUNT(*) vs COUNT(<column_name>) vs COUNT(DISTINCT <column_name>)
+#### COUNT(*) vs COUNT(col) vs COUNT(DISTINCT col)
 
 Specifying a column name in the `COUNT` function will count all rows for which that column has a non-null value; using `*` instead counds all rows including those containing `NULL`.
 
@@ -68,6 +68,17 @@ SELECT COUNT(email) AS n FROM people
 SELECT COUNT(DISTINCT first_name) AS n FROM people
 ```
 {{< /sqldiagram >}}
+
+{{< hint warning >}}
+
+**WARNING:**  The below query does **not** do the same thing as the one above.  The `DISTINCT` keyword in the query below is redundant because the `COUNT` function reduces the results down to a single row (so there can be no duplicate rows for `DISTINCT` to eliminate).
+
+{{< sqldiagram >}}
+```mysql
+SELECT DISTINCT COUNT(first_name) AS n FROM people
+```
+{{< /sqldiagram >}}
+{{< /hint >}}
 
 {{< sqldiagram >}}
 **Calculate the average, minimum, and maximum salary:**
