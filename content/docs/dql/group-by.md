@@ -152,6 +152,8 @@ SELECT first_name, last_name, MAX(salary) FROM person
 ```
 {{< /sqldiagram >}}
 
+See [Subqueries]({{< ref "subqueries" >}}) for a correct approach to this problem
+
 {{< /hint >}}
 
 {{< sqldiagram >}}
