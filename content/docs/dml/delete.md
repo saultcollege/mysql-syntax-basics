@@ -11,6 +11,7 @@ weight: 30
 ```mysql
 DELETE FROM <table_name> [WHERE <<ConditionExpression>>]
 ```
+[ConditionExpression]({{< ref "operators#condition-expression" >}})
 {{< /sqldiagram >}}
 
 {{< hint warning >}}

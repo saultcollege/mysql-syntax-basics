@@ -12,6 +12,7 @@ weight: 20
 UPDATE <table_name> SET {<col_name> = <value> | DEFAULT},.. 
 [WHERE <<ConditionExpression>>]
 ```
+[ConditionExpression]({{< ref "operators#condition-expression" >}})
 {{< /sqldiagram >}}
 
 {{< hint info >}}
