@@ -1,7 +1,7 @@
 ---
 title: "Character Sets & Collations"
 date: 2019-12-16T10:56:00
-weight: 1000
+weight: 55
 ---
 
 # Character Sets & Collations
