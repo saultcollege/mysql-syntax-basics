@@ -1,7 +1,7 @@
 ---
 title: "Compound Statements"
 date: 2020-02-25 11:50:55
-weight: 100
+weight: 1000
 ---
 
 # Compound Statements
@@ -70,6 +70,9 @@ IF <<ConditionExpression>> THEN
     <<CompoundStatements>>;]
 END IF;
 ```
+[ConditionExpression]({{< ref "operators#condition-expressions" >}})
+
+[CompoundStatements]({{< ref "compound-statements" >}})
 {{< /sqldiagram >}}
 
 #### Examples
@@ -112,27 +115,24 @@ There are a few options for looping in SQL:
 
 {{< sqldiagram >}}
 ```mysql
-[label:] LOOP
+[<label>:] LOOP
     <<CompoundStatements>>
 END LOOP;
-```
-{{< /sqldiagram >}}
 
-{{< sqldiagram >}}
-```mysql
-[label:] REPEAT
+-- OR
+[<label>:] REPEAT
     <<CompoundStatements>>
 UNTIL <<ConditionExpression>>
 END REPEAT;
-```
-{{< /sqldiagram >}}
 
-{{< sqldiagram >}}
-```mysql
-[label:] WHILE <<ConditionExpression>> DO
+-- OR
+[<label>:] WHILE <<ConditionExpression>> DO
     <<CompoundStatements>>
 END WHILE;
 ```
+[ConditionExpression]({{< ref "operators#condition-expressions" >}})
+
+[CompoundStatements]({{< ref "compound-statements" >}})
 {{< /sqldiagram >}}
 
 {{< hint info >}}
@@ -150,6 +150,7 @@ Both the `LEAVE` and `ITERATE` statements require a `<label>` as part of the sta
 #### Examples
 
 {{< sqldiagram >}}
+A simple while loop
 ```mysql
 WHILE i < 10 DO
     SET i := i + 1
@@ -158,6 +159,7 @@ END WHILE;
 {{< /sqldiagram >}}
 
 {{< sqldiagram >}}
+A simple repeat-until
 ```mysql
 REPEAT
     SET i := i + 1
@@ -167,6 +169,7 @@ END REPEAT;
 {{< /sqldiagram >}}
 
 {{< sqldiagram >}}
+Using labels and the `LEAVE` keyword to exit a loop
 ```mysql
 this_loop: LOOP
     SET i := i + 1
@@ -177,6 +180,7 @@ END LOOP;
 {{< /sqldiagram >}}
 
 {{< sqldiagram >}}
+Using labels and the `ITERATE` keyword to continue a loop
 ```mysql
 this_loop: WHILE i < 10 DO
     SET i := i + 1
@@ -184,5 +188,78 @@ this_loop: WHILE i < 10 DO
     END IF;
     SET s := s + 1
 END WHILE
+```
+{{< /sqldiagram >}}
+
+## Error Signaling
+
+{{< sqldiagram >}}
+```mysql
+SIGNAL SQLSTATE <value> SET MESSAGE_TEXT = <message>;
+```
+{{< /sqldiagram >}}
+
+{{< hint info >}}
+Often, the `SQLSTATE` value is '45000', which means ‘unhandled user-defined exception’
+{{< /hint >}}
+
+{{< hint info >}}
+The message text should be a description of the error
+{{< /hint >}}
+
+#### Examples
+
+{{< sqldiagram >}}
+```mysql
+SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Bazinga!';
+```
+{{< /sqldiagram >}}
+
+##  Error Handling
+
+By default, SQL errors cause a stored routine to exit at the point of the error, but this behaviour may be overridden via the following handler syntax:
+
+{{< sqldiagram >}}
+```mysql
+DECLARE {CONTINUE|EXIT} HANDLER 
+FOR {<err_no>|SQLSTATE <state_code>|SQLEXCEPTION} 
+    <<CompoundStatements>>
+```
+[CompoundStatements]({{< ref "compound-statements" >}})
+{{< /sqldiagram >}} 
+
+{{< hint info >}}
+A handler may be specified as a `CONTINUE` or `EXIT` handler.  A `CONTINUE` handler will allow the routine to continue after the handler’s `<<CompoundStatements>>` has executed, but an `EXIT` handler will exit the routine.
+{{< /hint >}}
+
+{{< hint info >}}
+`<err_no>` is an `INT`, one of the pre-defined [SQL error numbers](https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html)
+{{< /hint >}}
+
+{{< hint info >}}
+`<state_code>` is a **string**, one of the pre-defined [SQL state codes](https://dev.mysql.com/doc/refman/8.0/en/error-message-components.html)
+{{< /hint >}}
+
+{{< hint info >}}
+The `SQLEXCEPTION` condition is a catch-all that will result in the handler handling **all** SQL errors
+{{< /hint >}}
+
+#### Examples
+
+{{< sqldiagram >}}
+Yield the message ‘Something happened’ on any error (This is obviously not very useful)
+```mysql
+DECLARE EXIT HANDLER FOR SQLEXCEPTION SELECT 'Something happened'
+```
+{{< /sqldiagram >}}
+
+{{< sqldiagram >}}
+Rollback any open transactions and display a message on error
+```mysql
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+    ROLLBACK;
+    SELECT 'Operation rolled back after error';
+END;
 ```
 {{< /sqldiagram >}}

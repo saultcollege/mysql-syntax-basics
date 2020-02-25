@@ -1,7 +1,7 @@
 ---
 title: "Stored Procedures"
 date: 2020-02-25 11:50:55
-weight: 70
+weight: 10
 ---
 
 # Stored Procedures
@@ -11,7 +11,7 @@ weight: 70
 {{< sqldiagram >}}
 ```mysql
 CREATE PROCEDURE <procedure_name>(
-        {[ IN|OUT|INOUT ] <param_name> <<DataType>>},.. 
+        [ {[ IN|OUT|INOUT ] <param_name> <<DataType>>},.. ]
     )
 BEGIN
     <<CompoundStatements>>
@@ -21,6 +21,8 @@ END;
 
 [CompoundStatements]({{< ref "compound-statements" >}})
 {{< /sqldiagram >}}
+
+The results of stored procedure are the results of the first `SELECT` statement executed by the stored procedure.  It is also possible to return multiple values using `OUT` or `INOUT` parameters.  (See examples below.)
 
 {{< hint info >}}
 Parameters are `IN` by default, meaning that any changes to the parameter in the procedure are not visible to the caller.  If a parameter is declared to be `OUT` or `INOUT` then changes to the parameter are visible to the caller.
