@@ -10,7 +10,7 @@ weight: 10
 
 {{< sqldiagram >}}
 ```mysql
-CREATE PROCEDURE <procedure_name>(
+CREATE [OR REPLACE] PROCEDURE <procedure_name>(
         [ {[ IN|OUT|INOUT ] <param_name> <<DataType>>},.. ]
     )
 BEGIN

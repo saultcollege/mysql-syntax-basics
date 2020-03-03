@@ -12,7 +12,7 @@ Think of UDFs as a way to create new functions in addition to those provided by 
 
 {{< sqldiagram >}}
 ```mysql
-CREATE FUNCTION <function_namne>( [ {<param_name> <<DataType>>},.. ] )
+CREATE [OR REPLACE] FUNCTION <function_namne>( [ {<param_name> <<DataType>>},.. ] )
     RETURNS <<DataType>>
 BEGIN
     <<CompoundStatements>>
