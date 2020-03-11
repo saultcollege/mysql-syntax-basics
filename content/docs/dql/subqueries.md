@@ -124,6 +124,7 @@ FROM (
     -- Get monthly order totals
     SELECT MONTH(date) AS m, SUM(total) AS total
     FROM order
+    GROUP BY MONTH(date)
 ) AS monthly_totals  -- NOTE: subquery alias is necessary
 ```
 {{< /sqldiagram >}}
