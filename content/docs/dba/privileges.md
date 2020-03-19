@@ -27,7 +27,7 @@ There is a large set of [predefined privileges](https://dev.mysql.com/doc/refman
 
 {{< sqldiagram >}}
 ```mysql
-GRANT <privilege_name>,.. ON <scope> TO <username>[@<hostname>]|<role_name>
+GRANT <privilege_name>,.. ON <scope> TO <username>@<hostname>|<role_name>
 ```
 {{< /sqldiagram >}}
 
@@ -40,7 +40,7 @@ GRANT <privilege_name>,.. ON <scope> TO <username>[@<hostname>]|<role_name>
 
  - `*.*` means any database, any table
  - `<db_name>.*` means any object in the named database 
- - `<db_name>.<object_name>` means only the named object in the named database
+ - `<db_name>.<object_name>` means only the named object (table, view, routine, etc.) in the named database
 
 {{< /hint >}}
 
