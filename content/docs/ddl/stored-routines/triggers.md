@@ -10,7 +10,7 @@ weight: 30
 
 {{< sqldiagram >}}
 ```mysql
-CREATE TRIGGER <trigger_name> {BEFORE|AFTER} {INSERT|UPDATE|DELETE}
+CREATE [OR REPLACE] TRIGGER <trigger_name> {BEFORE|AFTER} {INSERT|UPDATE|DELETE}
     ON <table_name> FOR EACH ROW
     [ {FOLLOWS|PRECEDES} <other_trigger_name> ]
 BEGIN
