@@ -1,3 +1,3 @@
 # MySQL Syntax Basics
 
-This is the GitHub repository for the [MySQL Basics book](https://saultcollege-mysql-syntax-basics.netlify.com/).
+This is the GitHub repository for the [MySQL Syntax Basics book](https://saultcollege-mysql-syntax-basics.netlify.com/).
