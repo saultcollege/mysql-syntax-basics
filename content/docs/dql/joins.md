@@ -101,50 +101,6 @@ WHERE customer.name = NULL
 ```
 {{< /sqldiagram >}}
 
-## Natural Joins
-
-A natural join is simply a left or inner join for which the join predicate includes all (and only) the same-named columns in both tables.  If your database schema is such that foreign key columns have the same name as the primary key columns to which they refer, then many of your left and inner joins will be natural, and you can save some typing by using either the `USING` or the `NATURAL` keyword, as shown below.
-
-Consider the following query:
-
-{{< sqldiagram >}}
-```mysql
-SELECT * FROM bank JOIN account ON bank.bank_id = account.bank_id
-```
-{{< /sqldiagram >}}
-
-Since the column names in both tables are the same, we can use...
-
-#### ...the USING keyword
-
-{{< sqldiagram >}}
-```mysql
-SELECT * FROM bank JOIN account USING(bank_id)
-```
-{{< /sqldiagram >}}
-
-If it is the case that `bank_id` is the **only** column that is named the same when comparing the two tables in the join, then we can also use...
-
-#### ...the NATURAL keyword
-
-{{< sqldiagram >}}
-```mysql
-SELECT * FROM bank NATURAL JOIN account
-```
-{{< /sqldiagram >}}
-
-{{< hint info >}}
-**NOTE**: Natural joins may be used in the context of both `INNER` and `LEFT` join clauses.  Example:
-
-{{< sqldiagram >}}
-```mysql
-SELECT salesperson.name, customer.name
-FROM salesperson
-    NATURAL LEFT JOIN customer
-```
-{{< /sqldiagram >}}
-{{< /hint >}}
-
 ## Multi Joins
 
 There is no limit (aside from computer hardware limits) to the number tables you may join together in a single `FROM` clause, and you may combine different types of joins in a single `FROM` clause
