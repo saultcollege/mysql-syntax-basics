@@ -141,6 +141,7 @@ code CHAR(4) UNIQUE
         REFERENCES <table_name>(<other_table_col_name>,…)
         [ON UPDATE CASCADE] [ON DELETE CASCADE]
   | {UNIQUE|[UNIQUE] INDEX|KEY} [<index_name>] (<col_name>,..) [ ASC | DESC ]
+  | [CONSTRAINT [<constraint_name>]] CHECK (<condition>)
 ```
 {{< /sqldiagram >}}
 
@@ -197,6 +198,25 @@ UNIQUE INDEX (firstname, lastname)
 ```
 {{< /sqldiagram >}}
 
+{{< sqldiagram >}}
+**A simple check constraint (force an end date to be > start date)**
+
+```mysql
+CHECK (end_date >= start_date)
+```
+{{< /sqldiagram >}}
+
+{{< sqldiagram >}}
+**A named check constraint**
+
+```mysql
+CONSTRAINT ck_end_gt_start CHECK (end_date >= start_date)
+```
+{{< /sqldiagram >}}
+
+{{< hint info >}}
+Check constraints are only enforced as of MySQL version 8.0.16. Before this version, check constraints were syntactically valid but ignored.
+{{< /hint >}}
 
 ### Data Type
 

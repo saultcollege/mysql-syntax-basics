@@ -12,7 +12,7 @@ Roles can make user access control simpler to manage by removing the need to ass
 
 {{< sqldiagram >}}
 ```mysql
-CREATE ROLL [IF NOT EXISTS] <role_name>,..
+CREATE ROLE [IF NOT EXISTS] <role_name>,..
 ```
 {{< /sqldiagram >}}
 
